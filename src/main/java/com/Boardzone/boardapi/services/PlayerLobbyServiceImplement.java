@@ -3,17 +3,21 @@ package com.Boardzone.boardapi.services;
 import com.Boardzone.boardapi.entity.PlayerLobbyEntity;
 import com.Boardzone.boardapi.entity.PlayerLobbyId;
 import com.Boardzone.boardapi.repository.PlayerLobbyRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional; // Using Jakarta
 import java.util.List;
 
 @Service
 public class PlayerLobbyServiceImplement implements PlayerLobbyService {
 
+    private final PlayerLobbyRepository playerLobbyRepository;
+
     @Autowired
-    private PlayerLobbyRepository playerLobbyRepository;
+    public PlayerLobbyServiceImplement(PlayerLobbyRepository playerLobbyRepository) {
+        this.playerLobbyRepository = playerLobbyRepository;
+    }
 
     @Override
     @Transactional
@@ -31,7 +35,7 @@ public class PlayerLobbyServiceImplement implements PlayerLobbyService {
             playerLobbyEntity.setLobby_id(lobbyId);
             return playerLobbyRepository.save(playerLobbyEntity);
         }
-        return null; // or throw an exception if you prefer
+        return null; // or handle appropriately
     }
 
     @Override
@@ -41,7 +45,6 @@ public class PlayerLobbyServiceImplement implements PlayerLobbyService {
         if (isPlayerInLobby(playerId, lobbyId)) {
             playerLobbyRepository.deleteById(playerLobbyId);
         }
-        // Consider adding handling for cases where the player is not in the lobby
     }
 
     @Override

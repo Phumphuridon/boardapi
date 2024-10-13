@@ -10,9 +10,10 @@ import java.util.List;
 @Repository
 public interface PlayerLobbyRepository extends JpaRepository<PlayerLobbyEntity, PlayerLobbyId> {
 
-    // Method to find all player-lobby associations by lobby ID
-    List<PlayerLobbyEntity> findByLobby_Lobby_id(int lobbyId);
-
-    // Method to check if a specific player-lobby association exists
     boolean existsByPlayer_idAndLobby_id(int playerId, int lobbyId);
+
+    //List<PlayerLobbyEntity> findByLobby_lobbyId(int lobbyId); // Ensure fields match exactly
+
+    public List<PlayerLobbyEntity> findByLobby_Lobby_id(int lobbyId);
 }
+
