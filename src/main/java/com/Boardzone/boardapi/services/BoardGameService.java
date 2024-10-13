@@ -1,22 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Boardzone.boardapi.services;
 
 import com.Boardzone.boardapi.entity.BoardGameEntity;
-import java.util.Date;
 import java.util.List;
 
 /**
- *
- *
+ * Service interface for managing board games.
+ * 
  * @author user
  */
 public interface BoardGameService {
     
     BoardGameEntity addBoardGame(String boardgameName, int maxPlayers, long lobbyId, byte[] imagesetId,
-                                 String description, Date dateAdded, String rules, String category);
+                                 String description);
     
     List<BoardGameEntity> getAllBoardGames();
     
@@ -25,5 +20,5 @@ public interface BoardGameService {
     void deleteBoardGame(long boardgameId);
     
     BoardGameEntity updateBoardGame(long boardgameId, String boardgameName, int maxPlayers, long lobbyId,
-                                    byte[] imagesetId, String description, Date dateAdded, String rules, String category);
+                                    byte[] imagesetId, String description);
 }
