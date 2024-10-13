@@ -4,17 +4,13 @@
  */
 package com.Boardzone.boardapi.repository;
 
+import com.Boardzone.boardapi.entity.Lobby;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import com.Boardzone.boardapi.entity.User;
 
 /**
  *
  * @author phump
  */
-public interface UserRepository extends JpaRepository<User, Integer>{
-    @Query("SELECT u.user_id FROM User u WHERE u.user_name = :username")
-    Integer getUserIdByUserName(String username);
-
+public interface LobbyRepository extends JpaRepository<Lobby, Integer>{
+    
 }
