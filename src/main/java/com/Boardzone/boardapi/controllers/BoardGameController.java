@@ -7,12 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- *
- *
- *
- * @author User
- */
 @RestController
 @RequestMapping("/api")
 public class BoardGameController {
@@ -26,7 +20,7 @@ public class BoardGameController {
 
     @PostMapping("/boardgames")
     public BoardGameEntity addBoardGame(@RequestBody BoardGameEntity boardGame) {
-        boardGame.setBoardgame_id(0); // Ensure new ID is generated
+        boardGame.setBoardgame_id(0);
         return boardGameService.addBoardGame(
             boardGame.getBoardgame_name(),
             boardGame.getBoardgame_max_player(),
@@ -65,7 +59,6 @@ public class BoardGameController {
         }
         return updatedBoardGame;
     }
-
 
     @DeleteMapping("/boardgames/{id}")
     public String deleteBoardGame(@PathVariable long id) {

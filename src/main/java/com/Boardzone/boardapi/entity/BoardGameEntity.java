@@ -1,37 +1,19 @@
 package com.Boardzone.boardapi.entity;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "BOARDGAME")
-public class BoardGameEntity implements Serializable {
-    
+@Table(name="BoardGame")
+public class BoardGameEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long boardgame_id;
-
     private String boardgame_name;
     private int boardgame_max_player;
     private long lobby_id;
-    
-    @Lob
     private byte[] imageset_id;
-
-    @Lob
     private String boardgame_description;
 
-    public BoardGameEntity() {}
-
-    public BoardGameEntity(String boardgame_name, int boardgame_max_player, long lobby_id, byte[] imageset_id,
-                           String boardgame_description) {
-        this.boardgame_name = boardgame_name;
-        this.boardgame_max_player = boardgame_max_player;
-        this.lobby_id = lobby_id;
-        this.imageset_id = imageset_id;
-        this.boardgame_description = boardgame_description;
-    }
-    
     public long getBoardgame_id() {
         return boardgame_id;
     }
