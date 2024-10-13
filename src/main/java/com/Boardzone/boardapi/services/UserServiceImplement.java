@@ -4,10 +4,9 @@
  */
 package com.Boardzone.boardapi.services;
 
-import com.Boardzone.boardapi.entity.UserDemo;
+import com.Boardzone.boardapi.entity.User;
 import com.Boardzone.boardapi.repository.UserRepository;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,32 +15,42 @@ import org.springframework.stereotype.Service;
  * @author phump
  */
 @Service
-public class UserServiceImplement implements UserDemoService{
+public class UserServiceImplement implements UserService{
     private UserRepository userRepository;
     
     @Autowired
-    public UserServiceImplement(UserRepository userRepository){
+    public UserServiceImplement(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
+
     @Override
-    public UserDemo save(UserDemo user){
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public User addUser(User user) {
+        user.setUser_id(0);
         return userRepository.save(user);
     }
 
     @Override
-    public List<UserDemo> findAll() {
-        return userRepository.findAll();
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
-    
-    public UserDemo findById(Integer id){
-        Optional<UserDemo> result = userRepository.findById(id);
-        UserDemo data=null;
-        if (result.isPresent()){
-            data=result.get();
-        } else {
-            throw new RuntimeException("Not Found ID"+id);
-        }
-        return data;
+
+    @Override
+    public void deleteUserById(Integer id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public Integer getUserIdByUserName(String username) {
+        return userRepository.getUserIdByUserName(username);
     }
 }

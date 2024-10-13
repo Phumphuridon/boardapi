@@ -4,8 +4,9 @@
  */
 package com.Boardzone.boardapi.controllers;
 
-import com.Boardzone.boardapi.entity.UserDemo;
-import com.Boardzone.boardapi.services.UserDemoService;
+import com.Boardzone.boardapi.entity.User;
+import com.Boardzone.boardapi.services.UserService;
+import com.Boardzone.boardapi.util.sha256;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,40 +15,52 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 /**
  *
  * @author phump
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
     
-    private UserDemoService userDemoService;
-    
+    private UserService userService;
+
     @Autowired
-    public UserController(UserDemoService userDemoService) {
-        this.userDemoService = userDemoService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
     
-    @PostMapping("/users")
-    public UserDemo addUser(@RequestBody UserDemo user){
-        user.setId(0);
-        return userDemoService.save(user);
+    @GetMapping("/viewall")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
     }
     
-    @GetMapping("/users")
-    public List<UserDemo> getAllUsers(){
-        return userDemoService.findAll();
+    @GetMapping("/id/{id}")
+    public User getUserById(@PathVariable Integer id){
+        return userService.getUserById(id);
     }
     
-    @GetMapping("/users/{id}")
-    public UserDemo getUser(@PathVariable int id){
-        UserDemo myUser = userDemoService.findById(id);
-        if (myUser==null){
-            throw new RuntimeException("No data "+id);
-        } else {
-            return myUser;
+    @GetMapping("/username/{username}")
+    public Integer getIdByUsername(@PathVariable String username){
+        return userService.getUserIdByUserName(username);
+    }
+    
+    @PostMapping("/register")
+    public User addUser(@RequestBody User user){
+        user.setUser_password(sha256.hash2sha256(user.getUser_password()));
+        return userService.addUser(user);
+    }
+    
+    @PostMapping("/login")
+    public User loginUser(@RequestBody User user){
+        Integer user_id = userService.getUserIdByUserName(user.getUser_name());
+        User requestUser = userService.getUserById(user_id);
+        if (!user.getUser_name().equals(requestUser.getUser_name())){
+            return null;
         }
+        if (!sha256.hash2sha256(user.getUser_password()).equals(requestUser.getUser_password())){
+            return null;
+        }
+        return requestUser;
     }
 }
