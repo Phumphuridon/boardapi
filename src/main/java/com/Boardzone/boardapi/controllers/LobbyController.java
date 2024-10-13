@@ -23,7 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author phump
  */
-@RestController
+@RestController    
+
 @RequestMapping("/api/lobbies")
 public class LobbyController {
     private LobbyService lobbyService;

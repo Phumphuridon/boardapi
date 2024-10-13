@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 /**
  *
@@ -35,13 +36,13 @@ public class UserController {
         return userService.getAllUsers();
     }
     
-    @GetMapping("/id/{id}")
-    public User getUserById(@PathVariable Integer id){
+    @GetMapping("/user")
+    public User getUserById(@RequestParam Integer id){
         return userService.getUserById(id);
     }
     
-    @GetMapping("/username/{username}")
-    public Integer getIdByUsername(@PathVariable String username){
+    @GetMapping("/userid")
+    public Integer getIdByUsername(@RequestParam String username){
         return userService.getUserIdByUserName(username);
     }
     
