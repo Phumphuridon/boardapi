@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/boardgames") // เปลี่ยนการ Mapping เป็น /api/boardgames เพื่อให้สอดคล้องกับ UserController
+@RequestMapping("/api/boardgames")
 public class BoardGameController {
 
     private final BoardGameService boardGameService;
@@ -34,7 +34,7 @@ public class BoardGameController {
 
     @PostMapping("/add")
     public BoardGameEntity addBoardGame(@RequestBody BoardGameEntity boardGame) {
-        boardGame.setBoardgame_id(0); // Set ID to 0 to let the system auto-generate
+        boardGame.setBoardgame_id(0);
         return boardGameService.addBoardGame(
             boardGame.getBoardgame_name(),
             boardGame.getBoardgame_max_player(),
