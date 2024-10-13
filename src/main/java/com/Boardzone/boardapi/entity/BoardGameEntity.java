@@ -12,7 +12,7 @@ public class BoardGameEntity {
     private String boardgame_name;
     private int boardgame_max_player;
     private long lobby_id;
-    private byte[] imageset_id;
+    private int imageset_id;
     private String boardgame_description;
 
     public long getBoardgame_id() {
@@ -47,11 +47,11 @@ public class BoardGameEntity {
         this.lobby_id = lobby_id;
     }
 
-    public byte[] getImageset_id() {
+    public int getImageset_id() {
         return imageset_id;
     }
 
-    public void setImageset_id(byte[] imageset_id) {
+    public void setImageset_id(int imageset_id) {
         this.imageset_id = imageset_id;
     }
 
