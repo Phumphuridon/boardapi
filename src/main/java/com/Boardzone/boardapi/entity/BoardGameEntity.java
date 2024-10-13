@@ -3,11 +3,12 @@ package com.Boardzone.boardapi.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="BoardGame")
+@Table(name="boardgame")
 public class BoardGameEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long boardgame_id;
+    private int boardgame_id;
+    
     private String boardgame_name;
     private int boardgame_max_player;
     private long lobby_id;
@@ -18,7 +19,7 @@ public class BoardGameEntity {
         return boardgame_id;
     }
 
-    public void setBoardgame_id(long boardgame_id) {
+    public void setBoardgame_id(int boardgame_id) {
         this.boardgame_id = boardgame_id;
     }
 
