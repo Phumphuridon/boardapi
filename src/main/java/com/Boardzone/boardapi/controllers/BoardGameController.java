@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api") //
+@RequestMapping("/api/boardgames") // เปลี่ยนการ Mapping เป็น /api/boardgames เพื่อให้สอดคล้องกับ UserController
 public class BoardGameController {
 
     private final BoardGameService boardGameService;
@@ -18,9 +18,23 @@ public class BoardGameController {
         this.boardGameService = boardGameService;
     }
 
-    @PostMapping("/boardgames")
+    @GetMapping("/viewall")
+    public List<BoardGameEntity> getAllBoardGames() {
+        return boardGameService.getAllBoardGames();
+    }
+
+    @GetMapping("/id/{id}")
+    public BoardGameEntity getBoardGameById(@PathVariable long id) {
+        BoardGameEntity boardGame = boardGameService.getBoardGame(id);
+        if (boardGame == null) {
+            throw new RuntimeException("No board game found with ID: " + id);
+        }
+        return boardGame;
+    }
+
+    @PostMapping("/add")
     public BoardGameEntity addBoardGame(@RequestBody BoardGameEntity boardGame) {
-        boardGame.setBoardgame_id(0);
+        boardGame.setBoardgame_id(0); // Set ID to 0 to let the system auto-generate
         return boardGameService.addBoardGame(
             boardGame.getBoardgame_name(),
             boardGame.getBoardgame_max_player(),
@@ -30,21 +44,7 @@ public class BoardGameController {
         );
     }
 
-    @GetMapping("/boardgames")
-    public List<BoardGameEntity> getAllBoardGames() {
-        return boardGameService.getAllBoardGames();
-    }
-
-    @GetMapping("/boardgames/{id}")
-    public BoardGameEntity getBoardGame(@PathVariable long id) {
-        BoardGameEntity boardGame = boardGameService.getBoardGame(id);
-        if (boardGame == null) {
-            throw new RuntimeException("No board game found with ID: " + id);
-        }
-        return boardGame;
-    }
-
-    @PutMapping("/boardgames/{id}")
+    @PutMapping("/update/{id}")
     public BoardGameEntity updateBoardGame(@PathVariable long id, @RequestBody BoardGameEntity boardGame) {
         BoardGameEntity updatedBoardGame = boardGameService.updateBoardGame(
             id,
@@ -60,7 +60,7 @@ public class BoardGameController {
         return updatedBoardGame;
     }
 
-    @DeleteMapping("/boardgames/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteBoardGame(@PathVariable long id) {
         BoardGameEntity boardGame = boardGameService.getBoardGame(id);
         if (boardGame == null) {
