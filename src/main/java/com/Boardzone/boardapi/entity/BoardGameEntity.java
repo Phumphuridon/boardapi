@@ -1,38 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Entity;
+package com.Boardzone.boardapi.entity;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-/**
- *
- * @author User
- */
-@Entity(name="BOARDGAME")
+
+@Entity
+@Table(name = "BOARDGAME")
 public class BoardGameEntity implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long boardgame_id;
+
     private String boardgame_name;
     private int boardgame_max_player;
     private long lobby_id;
-    private byte[] imageset_id;
     
+    @Lob
+    private byte[] imageset_id;
+
     @Lob
     private String boardgame_description;
+
     private Date boardgame_dateAdded;
-    
+
     @Lob
     private String boardgame_rules;
+
     private String boardgame_category;
-    
+
+    // Default constructor
+    public BoardGameEntity() {}
+
+    // Constructor with fields
+    public BoardGameEntity(String boardgame_name, int boardgame_max_player, long lobby_id, byte[] imageset_id,
+                           String boardgame_description, Date boardgame_dateAdded, String boardgame_rules, String boardgame_category) {
+        this.boardgame_name = boardgame_name;
+        this.boardgame_max_player = boardgame_max_player;
+        this.lobby_id = lobby_id;
+        this.imageset_id = imageset_id;
+        this.boardgame_description = boardgame_description;
+        this.boardgame_dateAdded = boardgame_dateAdded;
+        this.boardgame_rules = boardgame_rules;
+        this.boardgame_category = boardgame_category;
+    }
+
+    // Getters and Setters
     public long getBoardgame_id() {
         return boardgame_id;
     }
@@ -80,6 +93,7 @@ public class BoardGameEntity implements Serializable {
     public void setBoardgame_description(String boardgame_description) {
         this.boardgame_description = boardgame_description;
     }
+
     public Date getBoardgame_dateAdded() {
         return boardgame_dateAdded;
     }

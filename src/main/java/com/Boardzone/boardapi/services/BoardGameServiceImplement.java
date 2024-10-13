@@ -1,32 +1,35 @@
-package Service;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.Boardzone.boardapi.services;
 
-import Entity.BoardGameEntity;
-import Interface.BoardGameRepository;
+import com.Boardzone.boardapi.entity.BoardGameEntity;
+import com.Boardzone.boardapi.repository.BoardGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
+
 /**
- * Service class for managing board games.
+ *
+ * 
+ * @author user
  */
 @Service
-public class BoardGameService {
+public class BoardGameServiceImplement implements BoardGameService {
+    
+    private final BoardGameRepository boardGameRepository;
+    
     @Autowired
-    private BoardGameRepository boardGameRepository;
-    /**
-     * Add a new board game to the database.
-     * @param boardgameName
-     * @param maxPlayers
-     * @param lobbyId
-     * @param imagesetId
-     * @param description
-     * @param dateAdded
-     * @param rules
-     * @param category
-     * @return 
-     */
+    public BoardGameServiceImplement(BoardGameRepository boardGameRepository) {
+        this.boardGameRepository = boardGameRepository;
+    }
+
+    @Override
     public BoardGameEntity addBoardGame(String boardgameName, int maxPlayers, long lobbyId, byte[] imagesetId,
-                                         String description, Date dateAdded, String rules, String category) {
+                                        String description, Date dateAdded, String rules, String category) {
         BoardGameEntity boardGame = new BoardGameEntity();
         boardGame.setBoardgame_name(boardgameName);
         boardGame.setBoardgame_max_player(maxPlayers);
@@ -39,21 +42,25 @@ public class BoardGameService {
         return boardGameRepository.save(boardGame);
     }
 
+    @Override
     public List<BoardGameEntity> getAllBoardGames() {
         return boardGameRepository.findAll();
     }
 
+    @Override
     public BoardGameEntity getBoardGame(long boardgameId) {
         return boardGameRepository.findById(boardgameId).orElse(null);
     }
-    
+
+    @Override
     public void deleteBoardGame(long boardgameId) {
         boardGameRepository.deleteById(boardgameId);
     }
 
+    @Override
     public BoardGameEntity updateBoardGame(long boardgameId, String boardgameName, int maxPlayers, long lobbyId,
-                                            byte[] imagesetId, String description, Date dateAdded,
-                                            String rules, String category) {
+                                           byte[] imagesetId, String description, Date dateAdded,
+                                           String rules, String category) {
         BoardGameEntity boardGame = boardGameRepository.findById(boardgameId).orElse(null);
         if (boardGame != null) {
             boardGame.setBoardgame_name(boardgameName);
