@@ -33,4 +33,6 @@ public class BoardGameController {
             @RequestParam ImageSetEntity imageSet,
             @RequestParam String description) {
         BoardGameEntity boardGame = boardGameService.addBoardGame(boardgameName, maxPlayers, imageSet, description);
-        return
+        return ResponseEntity.ok(boardGame);
+    }
+}

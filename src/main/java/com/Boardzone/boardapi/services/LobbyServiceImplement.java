@@ -1,8 +1,7 @@
 package com.Boardzone.boardapi.services;
 
-import com.Boardzone.boardapi.entity.Lobby;
+import com.Boardzone.boardapi.entity.LobbyEntity;
 import com.Boardzone.boardapi.repository.LobbyRepository;
-import jakarta.transaction.Transactional; // Ensure you are using the jakarta package
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,28 +14,41 @@ public class LobbyServiceImplement implements LobbyService {
     @Autowired
     private LobbyRepository lobbyRepository;
 
-    @Override
-    @Transactional
-    public List<Lobby> getAllLobby() {
-        return lobbyRepository.findAll(); // Fetch all lobbies from the repository
+    public List<LobbyEntity> getAllLobbies() {
+        return lobbyRepository.findAll();
     }
 
     @Override
-    @Transactional
-    public Lobby getLobbyById(Integer id) {
-        Optional<Lobby> lobbyOptional = lobbyRepository.findById(id);
-        return lobbyOptional.orElse(null); // Return null if not found
+    public LobbyEntity getLobbyById(int id) {
+        Optional<LobbyEntity> lobby = lobbyRepository.findById(id);
+        return lobby.orElse(null);
     }
 
     @Override
-    @Transactional
-    public Lobby addLobby(Lobby lobby) {
-        return lobbyRepository.save(lobby); // Save and return the new lobby
+    public LobbyEntity addLobby(LobbyEntity lobby) {
+        return lobbyRepository.save(lobby);
     }
 
     @Override
-    @Transactional
-    public void deleteLobbyById(Integer id) {
-        lobbyRepository.deleteById(id); // Delete the lobby by ID
+    public LobbyEntity updateLobby(int id, LobbyEntity lobbyDetails) {
+        LobbyEntity lobby = getLobbyById(id);
+        if (lobby != null) {
+            lobby.setLobby_description(lobbyDetails.getLobby_description());
+            lobby.setLobby_created_at(lobbyDetails.getLobby_created_at());
+            lobby.setLobby_ended_at(lobbyDetails.getLobby_ended_at());
+            // Update other fields as necessary
+            return lobbyRepository.save(lobby);
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteLobbyById(int id) {
+        lobbyRepository.deleteById(id);
+    }
+
+    @Override
+    public List<LobbyEntity> getAllLobby() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

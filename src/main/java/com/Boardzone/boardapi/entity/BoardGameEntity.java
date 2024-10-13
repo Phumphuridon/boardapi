@@ -62,4 +62,12 @@ public class BoardGameEntity {
     public void setImageSet(ImageSetEntity imageSet) {
         this.imageSet = imageSet;
     }
+
+    public void setLobby_id(int lobbyId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setImageset_id(byte[] imagesetId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

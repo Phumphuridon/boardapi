@@ -23,6 +23,10 @@ public class LobbyEntity {
     @OneToMany(mappedBy = "lobby", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PlayerLobbyEntity> playersInLobby;
 
+    @OneToOne
+    @JoinColumn(name = "boardgame_id", referencedColumnName = "boardgame_id")
+    private BoardGameEntity boardGame;
+
     // Getters and Setters
     public int getLobby_id() {
         return lobby_id;
@@ -62,5 +66,13 @@ public class LobbyEntity {
 
     public void setPlayersInLobby(Set<PlayerLobbyEntity> playersInLobby) {
         this.playersInLobby = playersInLobby;
+    }
+
+    public BoardGameEntity getBoardGame() {
+        return boardGame;
+    }
+
+    public void setBoardGame(BoardGameEntity boardGame) {
+        this.boardGame = boardGame;
     }
 }
