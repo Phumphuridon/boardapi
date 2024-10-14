@@ -69,7 +69,7 @@ public class LobbyController {
     }
     
     @DeleteMapping("/delete")
-    public void deleteLobby(Integer id){
+    public void deleteLobby(@RequestParam Integer id){
         lobbyService.deleteLobbyById(id);
     }
     
