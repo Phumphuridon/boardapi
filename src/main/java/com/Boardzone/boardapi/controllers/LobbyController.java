@@ -69,8 +69,8 @@ public class LobbyController {
     }
     
     @DeleteMapping("/delete")
-    public void deleteLobby(@RequestParam Integer id){
-        lobbyService.deleteLobbyById(id);
+    public void deleteLobby(@RequestParam Integer lobby_id){
+        lobbyService.deleteLobbyById(lobby_id);
     }
     
     @PostMapping("/join")
