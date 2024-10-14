@@ -50,7 +50,7 @@ public class LobbyController {
     
     @GetMapping("/alljoined")
     public List<User> getAllUsersInLobby(@RequestParam Integer lobby_id){
-        return lobbyService.getAllUsersInLobby(3);
+        return lobbyService.getAllUsersInLobby(lobby_id);
     }
     
     @GetMapping("/{id}")

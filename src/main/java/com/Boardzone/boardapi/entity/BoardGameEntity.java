@@ -12,14 +12,15 @@ public class BoardGameEntity {
     private String boardgame_name;
     private int boardgame_max_player;
     
-    @OneToOne
-    @JoinColumn(name = "Lobby")
-    private Lobby lobby_id;
     
     @Lob
     @Column(columnDefinition = "mediumblob")
     private byte[] boardgame_image;
     private String boardgame_description;
+    
+    @OneToOne
+    @JoinColumn(name = "Lobby")
+    private Lobby lobby_id;
 
     public BoardGameEntity() {
     }
