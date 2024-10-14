@@ -18,7 +18,7 @@ public class BoardGameServiceImplement implements BoardGameService {
     }
 
     @Override
-    public BoardGameEntity addBoardGame(String boardgameName, int maxPlayers, long lobbyId, byte[] imagesetId, String description) {
+    public BoardGameEntity addBoardGame(String boardgameName, int maxPlayers, long lobbyId, int imagesetId, String description) {
         BoardGameEntity boardGame = new BoardGameEntity();
         boardGame.setBoardgame_name(boardgameName);
         boardGame.setBoardgame_max_player(maxPlayers);
@@ -44,7 +44,7 @@ public class BoardGameServiceImplement implements BoardGameService {
     }
 
     @Override
-    public BoardGameEntity updateBoardGame(long boardgameId, String boardgameName, int maxPlayers, long lobbyId, byte[] imagesetId, String description) {
+    public BoardGameEntity updateBoardGame(long boardgameId, String boardgameName, int maxPlayers, long lobbyId, int imagesetId, String description) {
         BoardGameEntity boardGame = boardGameRepository.findById(boardgameId).orElse(null);
         if (boardGame != null) {
             boardGame.setBoardgame_name(boardgameName);
