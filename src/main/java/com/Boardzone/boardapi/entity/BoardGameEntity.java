@@ -12,10 +12,31 @@ public class BoardGameEntity {
     private String boardgame_name;
     private int boardgame_max_player;
     private long lobby_id;
-    private int imageset_id;
+    
+    @Lob
+    @Column(columnDefinition = "mediumblob")
+    private byte[] boardgame_image;
     private String boardgame_description;
 
-    public long getBoardgame_id() {
+    public BoardGameEntity() {
+    }
+
+    public BoardGameEntity(String boardgame_name, int boardgame_max_player, byte[] boardgame_image, String boardgame_description) {
+        this.boardgame_name = boardgame_name;
+        this.boardgame_max_player = boardgame_max_player;
+        this.boardgame_image = boardgame_image;
+        this.boardgame_description = boardgame_description;
+    }
+    
+    public BoardGameEntity(String boardgame_name, int boardgame_max_player, long lobby_id, byte[] boardgame_image, String boardgame_description) {
+        this.boardgame_name = boardgame_name;
+        this.boardgame_max_player = boardgame_max_player;
+        this.lobby_id = lobby_id;
+        this.boardgame_image = boardgame_image;
+        this.boardgame_description = boardgame_description;
+    }
+
+    public int getBoardgame_id() {
         return boardgame_id;
     }
 
@@ -47,12 +68,12 @@ public class BoardGameEntity {
         this.lobby_id = lobby_id;
     }
 
-    public int getImageset_id() {
-        return imageset_id;
+    public byte[] getBoardgame_image() {
+        return boardgame_image;
     }
 
-    public void setImageset_id(int imageset_id) {
-        this.imageset_id = imageset_id;
+    public void setBoardgame_image(byte[] boardgame_image) {
+        this.boardgame_image = boardgame_image;
     }
 
     public String getBoardgame_description() {

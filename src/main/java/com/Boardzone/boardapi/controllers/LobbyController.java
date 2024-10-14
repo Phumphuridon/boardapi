@@ -4,9 +4,11 @@
  */
 package com.Boardzone.boardapi.controllers;
 
+import com.Boardzone.boardapi.entity.BoardGameEntity;
 import com.Boardzone.boardapi.entity.Lobby;
 import com.Boardzone.boardapi.entity.User;
 import com.Boardzone.boardapi.repository.UserRepository;
+import com.Boardzone.boardapi.services.BoardGameService;
 import com.Boardzone.boardapi.services.LobbyService;
 import com.Boardzone.boardapi.services.UserService;
 import java.sql.Time;
@@ -32,11 +34,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class LobbyController {
     private LobbyService lobbyService;
     private UserService userService;
+    private BoardGameService boardgameService;
     
     @Autowired
-    public LobbyController(LobbyService lobbyService, UserService userService) {
+    public LobbyController(LobbyService lobbyService, UserService userService, BoardGameService boardgameService) {
         this.lobbyService = lobbyService;
         this.userService = userService;
+        this.boardgameService = boardgameService;
     }
     
     @GetMapping("/viewall")
@@ -55,9 +59,13 @@ public class LobbyController {
     }
     
     @PostMapping("/create")
-    public Lobby createLobby(@RequestBody Lobby lobby){
+    public Lobby createLobby(@RequestParam Long boardgame_id, @RequestBody Lobby lobby){
         lobby.setLobby_id(0);
-        return lobbyService.addLobby(lobby);
+        Lobby newLobby = lobbyService.addLobby(lobby);
+        BoardGameEntity boardgame = boardgameService.getBoardGame(boardgame_id);
+        boardgame.setLobby_id(newLobby.getLobby_id());
+        boardgameService.updateBoardGame(boardgame);
+        return newLobby;
     }
     
     @DeleteMapping("/delete")

@@ -18,17 +18,6 @@ public class BoardGameServiceImplement implements BoardGameService {
     }
 
     @Override
-    public BoardGameEntity addBoardGame(String boardgameName, int maxPlayers, long lobbyId, int imagesetId, String description) {
-        BoardGameEntity boardGame = new BoardGameEntity();
-        boardGame.setBoardgame_name(boardgameName);
-        boardGame.setBoardgame_max_player(maxPlayers);
-        boardGame.setLobby_id(lobbyId);
-        boardGame.setImageset_id(imagesetId);
-        boardGame.setBoardgame_description(description);
-        return boardGameRepository.save(boardGame);
-    }
-
-    @Override
     public List<BoardGameEntity> getAllBoardGames() {
         return boardGameRepository.findAll();
     }
@@ -44,20 +33,6 @@ public class BoardGameServiceImplement implements BoardGameService {
     }
 
     @Override
-    public BoardGameEntity updateBoardGame(long boardgameId, String boardgameName, int maxPlayers, long lobbyId, int imagesetId, String description) {
-        BoardGameEntity boardGame = boardGameRepository.findById(boardgameId).orElse(null);
-        if (boardGame != null) {
-            boardGame.setBoardgame_name(boardgameName);
-            boardGame.setBoardgame_max_player(maxPlayers);
-            boardGame.setLobby_id(lobbyId);
-            boardGame.setImageset_id(imagesetId);
-            boardGame.setBoardgame_description(description);
-            return boardGameRepository.save(boardGame);
-        }
-        return null;
-    }
-
-    @Override
     public long findFirstAvailableId() {
         List<BoardGameEntity> allBoardGames = boardGameRepository.findAll();
         if (allBoardGames.isEmpty()) {
@@ -66,4 +41,16 @@ public class BoardGameServiceImplement implements BoardGameService {
         long maxId = allBoardGames.stream().mapToLong(BoardGameEntity::getBoardgame_id).max().orElse(0);
         return maxId + 1;
     }
+
+    @Override
+    public BoardGameEntity addBoardGame(BoardGameEntity boardgame) {
+        boardgame.setBoardgame_id(0);
+        return boardGameRepository.save(boardgame);
+    }
+
+    @Override
+    public BoardGameEntity updateBoardGame(BoardGameEntity boardgame) {
+        return boardGameRepository.save(boardgame);
+    }
+
 }
