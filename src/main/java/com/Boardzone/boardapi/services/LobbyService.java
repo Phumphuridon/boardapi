@@ -5,6 +5,7 @@
 package com.Boardzone.boardapi.services;
 
 import com.Boardzone.boardapi.entity.Lobby;
+import com.Boardzone.boardapi.entity.User;
 import java.util.List;
 
 /**
@@ -19,4 +20,6 @@ public interface LobbyService {
     Lobby addLobby(Lobby lobby);
     
     void deleteLobbyById(Integer id);
+    
+    List<User> getAllUsersInLobby(Integer lobby_id);
 }

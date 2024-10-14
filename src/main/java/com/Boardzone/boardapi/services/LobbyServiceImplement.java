@@ -5,6 +5,7 @@
 package com.Boardzone.boardapi.services;
 
 import com.Boardzone.boardapi.entity.Lobby;
+import com.Boardzone.boardapi.entity.User;
 import com.Boardzone.boardapi.repository.LobbyRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,10 @@ public class LobbyServiceImplement implements LobbyService{
     @Override
     public void deleteLobbyById(Integer id) {
         lobbyRepository.deleteById(id);
+    }
+
+    @Override
+    public List<User> getAllUsersInLobby(Integer lobby_id) {
+        return lobbyRepository.getAllUsersInLobby(lobby_id);
     }
 }

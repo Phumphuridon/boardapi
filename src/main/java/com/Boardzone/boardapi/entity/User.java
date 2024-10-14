@@ -27,7 +27,11 @@ public class User implements Serializable {
     @Lob
     @Column(name = "user_profile", columnDefinition = "MEDIUMBLOB")
     private byte[] user_profile;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "Lobby")
+    private Lobby lobby_id;
+    
     public User() {
     }
 
@@ -42,6 +46,13 @@ public class User implements Serializable {
         this.user_profile = user_profile;
     }
 
+    public User(String user_name, String user_password, byte[] user_profile, Lobby lobby_id) {
+        this.user_name = user_name;
+        this.user_password = user_password;
+        this.user_profile = user_profile;
+        this.lobby_id = lobby_id;
+    }
+    
     public int getUser_id() {
         return user_id;
     }
@@ -72,5 +83,13 @@ public class User implements Serializable {
 
     public void setUser_profile(byte[] user_profile) {
         this.user_profile = user_profile;
+    }
+
+    public Lobby getLobby_id() {
+        return lobby_id;
+    }
+
+    public void setLobby_id(Lobby lobby_id) {
+        this.lobby_id = lobby_id;
     }
 }

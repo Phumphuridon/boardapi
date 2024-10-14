@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImplement implements UserService{
     private UserRepository userRepository;
-    
+
     @Autowired
     public UserServiceImplement(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -30,7 +30,7 @@ public class UserServiceImplement implements UserService{
 
     @Override
     public User getUserById(Integer id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow();
     }
 
     @Override
