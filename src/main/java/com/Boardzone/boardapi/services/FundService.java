@@ -16,4 +16,7 @@ public interface FundService {
     void deleteFund(int fund_id);
     FundEntity updateFund(int fund_id, String title, String description,  int goal_amount, int raised_amount, int imageset_id);
     long findFirstAvailableId();
+    boolean approveFund(int fund_id);
+    boolean disapproveFund(int fund_id);
+
 }

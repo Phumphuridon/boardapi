@@ -69,5 +69,23 @@ public class FundServiceImplement implements FundService {
         long maxId = allBoardGames.stream().mapToLong(FundEntity::getFund_id).max().orElse(0);
         return maxId + 1;
     }
+    
+    @Override
+    public boolean approveFund(int fund_id) {
+        FundEntity fund = fundrepository.findById(fund_id).orElse(null);
+        if (fund != null) {
+            return true;
+        }
+        return false; 
+    }
 
+    @Override
+    public boolean disapproveFund(int fund_id) {
+        FundEntity fund = fundrepository.findById(fund_id).orElse(null);
+        if (fund != null) {
+            fundrepository.deleteById(fund_id);
+            return true;
+        }
+        return false;
+}
 }
