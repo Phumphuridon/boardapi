@@ -10,10 +10,10 @@ import java.util.List;
 @Repository
 public interface PlayerLobbyRepository extends JpaRepository<PlayerLobbyEntity, PlayerLobbyId> {
 
-    boolean existsByPlayer_idAndLobby_id(int playerId, int lobbyId);
+    boolean existsByPlayerIdAndLobbyId(int playerId, int lobbyId);
 
-    //List<PlayerLobbyEntity> findByLobby_lobbyId(int lobbyId); // Ensure fields match exactly
+    List<PlayerLobbyEntity> findByLobby_LobbyId(int lobbyId); // Ensure fields match exactly
 
-    public List<PlayerLobbyEntity> findByLobby_Lobby_id(int lobbyId);
+    //public List<PlayerLobbyEntity> findByLobby_Lobby_id(int lobbyId);
 }
 

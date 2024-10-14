@@ -22,7 +22,7 @@ public class PlayerLobbyServiceImplement implements PlayerLobbyService {
     @Override
     @Transactional
     public List<PlayerLobbyEntity> getPlayersInLobby(int lobbyId) {
-        return playerLobbyRepository.findByLobby_Lobby_id(lobbyId);
+        return playerLobbyRepository.findByLobby_LobbyId(lobbyId);
     }
 
     @Override
@@ -50,6 +50,6 @@ public class PlayerLobbyServiceImplement implements PlayerLobbyService {
     @Override
     @Transactional
     public boolean isPlayerInLobby(int playerId, int lobbyId) {
-        return playerLobbyRepository.existsByPlayer_idAndLobby_id(playerId, lobbyId);
+        return playerLobbyRepository.existsByPlayerIdAndLobbyId(playerId, lobbyId);
     }
 }

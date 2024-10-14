@@ -7,9 +7,10 @@ import java.util.Set;
 @Entity
 @Table(name = "lobby")
 public class LobbyEntity {
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int lobby_id;
+    @Column(name = "lobby_id", unique = true, nullable = false)
+    private int lobbyId;
 
     @Column(name = "lobby_description", length = 255)
     private String lobby_description;
@@ -26,14 +27,19 @@ public class LobbyEntity {
     @OneToOne
     @JoinColumn(name = "boardgame_id", referencedColumnName = "boardgame_id")
     private BoardGameEntity boardGame;
-
+    @ManyToOne
+    @JoinColumn(name = "lobby_id", insertable = false, updatable = false)
+    private LobbyEntity lobby;
+    @ManyToOne
+    @JoinColumn(name = "player_id", insertable = false, updatable = false)
+    private User user;
     // Getters and Setters
     public int getLobby_id() {
-        return lobby_id;
+        return lobbyId;
     }
 
-    public void setLobby_id(int lobby_id) {
-        this.lobby_id = lobby_id;
+    public void setLobby_id(int lobbyId) {
+        this.lobbyId = lobbyId;
     }
 
     public String getLobby_description() {

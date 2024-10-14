@@ -8,11 +8,11 @@ import jakarta.persistence.*;
 public class PlayerLobbyEntity {
     @Id
     @Column(name = "player_id")
-    private int player_id;
+    private int playerId;
 
     @Id
     @Column(name = "lobby_id")
-    private int lobby_id;
+    private int lobbyId;
 
     // Foreign key reference to User
     @ManyToOne
@@ -26,19 +26,19 @@ public class PlayerLobbyEntity {
 
     // Getters and Setters
     public int getPlayer_id() {
-        return player_id;
+        return playerId;
     }
 
     public void setPlayer_id(int player_id) {
-        this.player_id = player_id;
+        this.playerId = playerId;
     }
 
     public int getLobby_id() {
-        return lobby_id;
+        return lobbyId;
     }
 
     public void setLobby_id(int lobby_id) {
-        this.lobby_id = lobby_id;
+        this.lobbyId = lobbyId;
     }
 
     public User getUser() {
