@@ -15,6 +15,6 @@ import org.springframework.data.jpa.repository.Query;
  * @author phump
  */
 public interface LobbyRepository extends JpaRepository<Lobby, Integer>{
-    @Query("SELECT u FROM User u WHERE u.lobby_id.lobby_id = :lobby_id")
+    @Query("SELECT u FROM User u WHERE u.lobby.lobby_id = :lobby_id")
     List<User> getAllUsersInLobby(Integer lobby_id);
 }

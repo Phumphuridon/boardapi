@@ -63,7 +63,7 @@ public class LobbyController {
         lobby.setLobby_id(0);
         Lobby newLobby = lobbyService.addLobby(lobby);
         BoardGameEntity boardgame = boardgameService.getBoardGame(boardgame_id);
-        boardgame.setLobby_id(newLobby.getLobby_id());
+        boardgame.setLobby_id(newLobby);
         boardgameService.updateBoardGame(boardgame);
         return newLobby;
     }

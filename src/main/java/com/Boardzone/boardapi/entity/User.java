@@ -30,7 +30,7 @@ public class User implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "Lobby")
-    private Lobby lobby_id;
+    private Lobby lobby;
     
     public User() {
     }
@@ -46,11 +46,11 @@ public class User implements Serializable {
         this.user_profile = user_profile;
     }
 
-    public User(String user_name, String user_password, byte[] user_profile, Lobby lobby_id) {
+    public User(String user_name, String user_password, byte[] user_profile, Lobby lobby) {
         this.user_name = user_name;
         this.user_password = user_password;
         this.user_profile = user_profile;
-        this.lobby_id = lobby_id;
+        this.lobby = lobby;
     }
     
     public int getUser_id() {
@@ -86,10 +86,10 @@ public class User implements Serializable {
     }
 
     public Lobby getLobby_id() {
-        return lobby_id;
+        return lobby;
     }
 
     public void setLobby_id(Lobby lobby_id) {
-        this.lobby_id = lobby_id;
+        this.lobby = lobby_id;
     }
 }

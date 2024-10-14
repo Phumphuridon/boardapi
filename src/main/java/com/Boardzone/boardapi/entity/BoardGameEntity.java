@@ -11,7 +11,10 @@ public class BoardGameEntity {
     
     private String boardgame_name;
     private int boardgame_max_player;
-    private long lobby_id;
+    
+    @OneToOne
+    @JoinColumn(name = "Lobby")
+    private Lobby lobby_id;
     
     @Lob
     @Column(columnDefinition = "mediumblob")
@@ -27,8 +30,8 @@ public class BoardGameEntity {
         this.boardgame_image = boardgame_image;
         this.boardgame_description = boardgame_description;
     }
-    
-    public BoardGameEntity(String boardgame_name, int boardgame_max_player, long lobby_id, byte[] boardgame_image, String boardgame_description) {
+
+    public BoardGameEntity(String boardgame_name, int boardgame_max_player, Lobby lobby_id, byte[] boardgame_image, String boardgame_description) {
         this.boardgame_name = boardgame_name;
         this.boardgame_max_player = boardgame_max_player;
         this.lobby_id = lobby_id;
@@ -60,11 +63,11 @@ public class BoardGameEntity {
         this.boardgame_max_player = boardgame_max_player;
     }
 
-    public long getLobby_id() {
+    public Lobby getLobby_id() {
         return lobby_id;
     }
 
-    public void setLobby_id(long lobby_id) {
+    public void setLobby_id(Lobby lobby_id) {
         this.lobby_id = lobby_id;
     }
 
