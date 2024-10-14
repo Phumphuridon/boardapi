@@ -24,7 +24,7 @@ public class Lobby {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int lobby_id;
     
-    private String lobby_description;
+    private String lobby_location;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date lobby_created_at;
@@ -36,7 +36,7 @@ public class Lobby {
     }
 
     public Lobby(String lobby_description, Date lobby_created_at, Date lobby_ended_at) {
-        this.lobby_description = lobby_description;
+        this.lobby_location = lobby_description;
         this.lobby_created_at = lobby_created_at;
         this.lobby_ended_at = lobby_ended_at;
     }
@@ -66,11 +66,11 @@ public class Lobby {
     }
 
     public String getLobby_description() {
-        return lobby_description;
+        return lobby_location;
     }
 
     public void setLobby_description(String lobby_description) {
-        this.lobby_description = lobby_description;
+        this.lobby_location = lobby_description;
     }
     
     
