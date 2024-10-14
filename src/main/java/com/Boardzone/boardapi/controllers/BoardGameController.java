@@ -34,30 +34,12 @@ public class BoardGameController {
 
     @PostMapping("/add")
     public BoardGameEntity addBoardGame(@RequestBody BoardGameEntity boardGame) {
-        boardGame.setBoardgame_id(0);
-        return boardGameService.addBoardGame(
-            boardGame.getBoardgame_name(),
-            boardGame.getBoardgame_max_player(),
-            boardGame.getLobby_id(),
-            boardGame.getImageset_id(),
-            boardGame.getBoardgame_description()
-        );
+        return boardGameService.addBoardGame(boardGame);
     }
 
     @PutMapping("/update/{id}")
     public BoardGameEntity updateBoardGame(@PathVariable long id, @RequestBody BoardGameEntity boardGame) {
-        BoardGameEntity updatedBoardGame = boardGameService.updateBoardGame(
-            id,
-            boardGame.getBoardgame_name(),
-            boardGame.getBoardgame_max_player(),
-            boardGame.getLobby_id(),
-            boardGame.getImageset_id(),
-            boardGame.getBoardgame_description()
-        );
-        if (updatedBoardGame == null) {
-            throw new RuntimeException("No board game found with ID: " + id);
-        }
-        return updatedBoardGame;
+        return boardGameService.updateBoardGame(boardGame);
     }
 
     @DeleteMapping("/delete/{id}")

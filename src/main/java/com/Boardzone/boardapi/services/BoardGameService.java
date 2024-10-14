@@ -4,10 +4,10 @@ import com.Boardzone.boardapi.entity.BoardGameEntity;
 import java.util.List;
 
 public interface BoardGameService {
-    BoardGameEntity addBoardGame(String boardgameName, int maxPlayers, long lobbyId, int imagesetId, String description);
+    BoardGameEntity addBoardGame(BoardGameEntity boardgame);
     List<BoardGameEntity> getAllBoardGames();
     BoardGameEntity getBoardGame(long boardgameId);
     void deleteBoardGame(long boardgameId);
-    BoardGameEntity updateBoardGame(long boardgameId, String boardgameName, int maxPlayers, long lobbyId, int imagesetId, String description);
+    BoardGameEntity updateBoardGame(BoardGameEntity boardgame);
     long findFirstAvailableId();
 }
