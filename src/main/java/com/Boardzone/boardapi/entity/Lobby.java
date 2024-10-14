@@ -35,8 +35,8 @@ public class Lobby {
     public Lobby() {
     }
 
-    public Lobby(int lobby_id, Date lobby_created_at, Date lobby_ended_at) {
-        this.lobby_id = lobby_id;
+    public Lobby(String lobby_description, Date lobby_created_at, Date lobby_ended_at) {
+        this.lobby_description = lobby_description;
         this.lobby_created_at = lobby_created_at;
         this.lobby_ended_at = lobby_ended_at;
     }
@@ -64,4 +64,14 @@ public class Lobby {
     public void setLobby_ended_at(Date lobby_ended_at) {
         this.lobby_ended_at = lobby_ended_at;
     }
+
+    public String getLobby_description() {
+        return lobby_description;
+    }
+
+    public void setLobby_description(String lobby_description) {
+        this.lobby_description = lobby_description;
+    }
+    
+    
 }

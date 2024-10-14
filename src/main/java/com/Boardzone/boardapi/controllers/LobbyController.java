@@ -5,7 +5,10 @@
 package com.Boardzone.boardapi.controllers;
 
 import com.Boardzone.boardapi.entity.Lobby;
+import com.Boardzone.boardapi.entity.User;
+import com.Boardzone.boardapi.repository.UserRepository;
 import com.Boardzone.boardapi.services.LobbyService;
+import com.Boardzone.boardapi.services.UserService;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
@@ -28,15 +31,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/lobbies")
 public class LobbyController {
     private LobbyService lobbyService;
+    private UserService userService;
     
     @Autowired
-    public LobbyController(LobbyService lobbyService) {
+    public LobbyController(LobbyService lobbyService, UserService userService) {
         this.lobbyService = lobbyService;
+        this.userService = userService;
     }
     
     @GetMapping("/viewall")
     public List<Lobby> getAllLobby(){
         return lobbyService.getAllLobby();
+    }
+    
+    @GetMapping("/alljoined")
+    public List<User> getAllUsersInLobby(@RequestParam Integer lobby_id){
+        return lobbyService.getAllUsersInLobby(3);
     }
     
     @GetMapping("/{id}")
@@ -54,4 +64,21 @@ public class LobbyController {
     public void deleteLobby(Integer id){
         lobbyService.deleteLobbyById(id);
     }
+    
+    @PostMapping("/join")
+    public User joinLobby(@RequestParam Integer user_id, Integer lobby_id){
+        User joiningUser = userService.getUserById(user_id);
+        Lobby joinedLobby = lobbyService.getLobbyById(lobby_id);
+        joiningUser.setLobby_id(joinedLobby);
+        userService.updateUser(joiningUser);
+        return joiningUser;
+    }
+    
+    @PostMapping("/leave")
+    public User leaveLobby(@RequestParam Integer user_id){
+        User joinedUser = userService.getUserById(user_id);
+        joinedUser.setLobby_id(null);
+        return joinedUser;
+    }
+    
 }
