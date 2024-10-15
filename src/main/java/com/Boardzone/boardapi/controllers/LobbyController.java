@@ -86,6 +86,7 @@ public class LobbyController {
     public User leaveLobby(@RequestParam Integer user_id){
         User joinedUser = userService.getUserById(user_id);
         joinedUser.setLobby_id(null);
+        userService.updateUser(joinedUser);
         return joinedUser;
     }
     
